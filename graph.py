@@ -1,21 +1,3 @@
-data = [
-    {"name": "Algebra", "credits": 2},
-    {"name": "EDA", "credits": 2},
-    {"name": "Networks", "credits": 2},
-    # {"name": "Calculus", "credits": 2},
-    # {"name": "Databases", "credits": 2},
-    # {"name": "Physic", "credits": 2},
-    # # {
-    #     "name": "Algebra",
-    #     "credits": 2
-    # },
-    # {
-    #     "name": "Algebra",
-    #     "credits": 2
-    # }
-]
-
-
 def recursive(data, index, used_credits, path, min_credits, max_credits, memo, key):
     path = path.copy()
     if index == len(data):
@@ -36,7 +18,6 @@ def recursive(data, index, used_credits, path, min_credits, max_credits, memo, k
 
     path.append(currentData)
 
-    
     key += currentData["name"] + "-"
     remainders = len(data) - index
     for j in range(1, remainders + 1):
@@ -57,8 +38,27 @@ def recursive(data, index, used_credits, path, min_credits, max_credits, memo, k
         return path
 
 
-memo = []
-recursive(data, 0, 0, [], 4, 7, memo, "")
+def solve():
+    data = [
+        {"name": "Algebra", "credits": 3},
+        {"name": "EDA I", "credits": 3},
+        {"name": "Networks", "credits": 4},
+        {"name": "Calculus", "credits": 3},
+        {"name": "Databases", "credits": 3},
+        {"name": "Physic", "credits": 3},
+        {"name": "EDA II", "credits": 3},
+        {"name": "Programming", "credits": 3},
+        {"name": "Mathematics", "credits": 3},
+    ]
 
-print(memo)
-# print(list(filter(lambda x: x is not None, memo)))
+    min_credits = 9
+    max_credits = 15
+
+    memo = []
+
+    for i in range(0, len(data)):
+        recursive(data, i, 0, [], min_credits, max_credits, memo, "")
+
+    print(list(filter(lambda x: x is not None, memo)))
+
+solve()
